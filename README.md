@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND=noninteractive && rm -f /etc/resolv.conf && sed -i '/disa
 ```
 2. Jalankan perintah berikut untuk memulai instalasi:
 ```bash
-screen -S setup-session bash -c "wget -q https://raw.githubusercontent.com/arivpnstores/v7/main/install.sh && chmod +x install.sh && ./install.sh"
+screen -S setup-session bash -c "wget -q https://raw.githubusercontent.com/Pemulaajiw/v7/main/install.sh && chmod +x install.sh && ./install.sh"
 ```
 
 ---
@@ -48,7 +48,7 @@ Script ini sudah diuji pada sistem berikut:
 * Auto swap 1GB
 * Instalasi otomatis & dinamis
 * Optimasi konfigurasi server
-* Core Xray by @ARI_VPN_STORE
+* Core Xray by @AJW29
 * Fail2ban security system
 * Auto block sebagian iklan Indonesia
 * Auto clean log tiap 3 menit
@@ -74,6 +74,7 @@ SSH WS / TLS     : 443
 SSH NON TLS      : 8880
 OVPN SSL/TCP     : 1194
 SLOWDNS          : 5300
+UDP ZIVPN        : 5667
 ```
 
 ---
@@ -158,15 +159,15 @@ Under Attack Mode      : OFF
 </p>
 
 <p align="center">
-<a href="https://github.com/Mrz051"><img src="https://img.shields.io/badge/AUTHOR-PEYX-orange?style=for-the-badge&logo=github"></a>
+<a href="https://github.com/Pemulaajiw"><img src="https://img.shields.io/badge/AUTHOR-PEYX-orange?style=for-the-badge&logo=github"></a>
 </p>
 
 <p align="center">
-<a href="https://t.me/peyyx"><img src="https://img.shields.io/badge/Telegram-Contact-blue?style=for-the-badge&logo=telegram"></a>
+<a href="https://t.me/AJW29"><img src="https://img.shields.io/badge/Telegram-Contact-blue?style=for-the-badge&logo=telegram"></a>
 </p>
 
 <p align="center">
-<a href="https://wa.me/6285647299390"><img src="https://img.shields.io/badge/WhatsApp-Contact-green?style=for-the-badge&logo=whatsapp"></a>
+<a href="https://wa.me/6287898083051"><img src="https://img.shields.io/badge/WhatsApp-Contact-green?style=for-the-badge&logo=whatsapp"></a>
 </p>
 ```
 

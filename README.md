@@ -27,7 +27,7 @@ screen -r -d setup-session
 Untuk melakukan update ke versi terbaru, gunakan:
 
 ```bash
-wget https://raw.githubusercontent.com/arivpnstores/v7/main/update.sh && chmod +x update.sh && ./update.sh
+wget https://raw.githubusercontent.com/Pemulaajiw/v7/main/update.sh && chmod +x update.sh && ./update.sh
 ```
 
 ---

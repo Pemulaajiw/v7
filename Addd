@@ -152,32 +152,32 @@ clear
 
 cat > /var/www/html/ssh-$Login.txt <<-END
 ◇━━━━━━━━━━━━━━━━━◇
- Zenitsu Tunneling 
-◇━━━━━━━━━━━━━━━━━◇
-Format SSH OVPN Account
+Format SSH & ZIVPN Account
 ◇━━━━━━━━━━━━━━━━━◇
 Username         : $Login
 Password         : $Pass
+ZIVPN Token      : $Login
 ◇━━━━━━━━━━━━━━━━━◇
 IP               : $IP
 Host             : $domain
 Port OpenSSH     : 443, 80, 22
 Port Dropbear    : 443, 109
-Port Dropbear WS : 443, 109
-Port SSH UDP     : 1-65535
-Port SSH WS      : 80, 8080, 8081-9999
+Port SSH WS      : 80, 8080
 Port SSH SSL WS  : 443
-Port SSL/TLS     : 400-900
-Port OVPN WS SSL : 443
-Port OVPN SSL    : 443
-Port OVPN TCP    : 1194
-Port OVPN UDP    : 2200
-BadVPN UDP       : 7100, 7300, 7300
+Port ZIVPN UDP   : $UDP_ZIVPN (All Port)
 ◇━━━━━━━━━━━━━━━━━◇
 Aktif Selama     : $masaaktif Hari
 Dibuat Pada      : $tnggl
 Berakhir Pada    : $expe
 ◇━━━━━━━━━━━━━━━━━◇
+SETTING ZIVPN :
+UDP SERVER    : $domain
+UDP PASSWORD  : $Login
+◇━━━━━━━━━━━━━━━━━◇
+SETTING UDP-COSTUM :
+$domain:1-65535@$Login:$Pass
+◇━━━━━━━━━━━━━━━━━◇
+CONTOH :
 Payload WSS: GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf] 
 ◇━━━━━━━━━━━━━━━━━◇
 OVPN Download : https://$domain:81/
@@ -270,37 +270,58 @@ curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TE
 
 clear
 echo ""
-echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━━◇$NC"
-echo -e "   SSH OVPN Account    "
-echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━━◇$NC"
-echo -e "Username         : $Login"
-echo -e "Password         : $Pass"
-echo -e "Limit Quota      : $Quota GB"
-echo -e "Limit Ip         : ${iplimit} User"
-echo -e "IP               : $IP"
-echo -e "Host             : $domain"
-echo -e "Port OpenSSH     : 443, 80, 22"
-echo -e "Port SSH UDP     : 1-65535"
-echo -e "Port Dropbear    : 443, 109"
-echo -e "Port SSH WS      : 80, 8080, 8081-9999"
-echo -e "Port SSH SSL WS  : 443"
-echo -e "Port SSL/TLS     : 400-900"
-echo -e "Port OVPN WS SSL : 443"
-echo -e "Port OVPN SSL    : 443"
-echo -e "Port OVPN TCP    : 443, 1194"
-echo -e "Port OVPN UDP    : 2200"
-echo -e "BadVPN UDP       : 7100, 7300, 7300"
-echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━━━━━━◇$NC"
-echo -e "Payload WSS      : GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]"
-echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━━━━━━◇$NC"
-echo -e "OVPN Download    : https://$domain:81/"
-echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━━━━━━◇$NC"
-echo -e "Save Link Account: https://$domain:81/ssh-$Login.txt"
-echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━━━━━━◇$NC"
-echo -e "Aktif Selama     : $masaaktif Hari"
-echo -e "Dibuat Pada      : $tnggl"
-echo -e "Berakhir Pada    : $expe"
-echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━━━━━━◇$NC"
+echo ""
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "🔵 Success Create SSH & ZIVPN 🔵" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "➤ Domain        : $domain" | tee -a /etc/user-create/user.log
+echo -e "➤ Username      : $Login" | tee -a /etc/user-create/user.log
+echo -e "➤ Password      : $Pass" | tee -a /etc/user-create/user.log
+echo -e "➤ ZIVPN Token   : $Login" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "➤ Limit Ip      : $iplimit Device" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "➤ IP            : $IP" | tee -a /etc/user-create/user.log
+echo -e "➤ Limit Quota   : $Quota GB" | tee -a /etc/user-create/user.log
+echo -e "➤ Host Slowdns  : ${NS}" | tee -a /etc/user-create/user.log
+echo -e "➤ Isp           : $ISP" | tee -a /etc/user-create/user.log
+echo -e "➤ Location      : $CITY" | tee -a /etc/user-create/user.log
+echo -e "➤ Port OpenSSH  : 443, 80, 22" | tee -a /etc/user-create/user.log
+echo -e "➤ Port DNS      : 443, 53 ,22 " | tee -a /etc/user-create/user.log
+echo -e "➤ Port SSH UDP  : 1-65535" | tee -a /etc/user-create/user.log
+echo -e "➤ Port ZIVPN    : $UDP_ZIVPN" | tee -a /etc/user-create/user.log
+echo -e "➤ Port Dropbear : 443, 109" | tee -a /etc/user-create/user.log
+echo -e "➤ Port SSH WS   : 80, 8080, 8880, 2082" | tee -a /etc/user-create/user.log
+echo -e "➤ Port OVPN SSL : 443" | tee -a /etc/user-create/user.log
+echo -e "➤ Port OVPN TCP : 443, 1194" | tee -a /etc/user-create/user.log
+echo -e "➤ Port OVPN UDP : 2200" | tee -a /etc/user-create/user.log
+echo -e "➤ BadVPN UDP    : 7100, 7300, 7300" | tee -a /etc/user-create/user.log
+echo -e "➤ Pub Key       : ${PUB}" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "➤ \033[1;36mSSH UDP\033[0m       : \033[1;32m$domain:1-65535@${Login}:${Pass}\033[0m" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "➤ \033[1;33mSSH ZIVPN FORMAT\033[0m" | tee -a /etc/user-create/user.log
+echo -e "➤ \033[1;36mUDP SERVER\033[0m    : \033[1;32m$domain\033[0m" | tee -a /etc/user-create/user.log
+echo -e "➤ \033[1;36mPASSWORD\033[0m      : \033[1;32m${Login}\033[0m" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "𝗣𝗮𝘆𝗹𝗼𝗮𝗱 𝗪𝗲𝗯𝘀𝗼𝗰𝗸𝗲𝘁 :
+GET / HTTP/1.1[crlf]host: $domain[crlf]Upgrade: Websocket[crlf][crlf]" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "𝗣𝗮𝘆𝗹𝗼𝗮𝗱 𝗦𝗦𝗟 / 𝗧𝗟𝗦 : 
+GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "𝗣𝗮𝘆𝗹𝗼𝗮𝗱 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗱 : 
+PATCH / HTTP/1.1[crlf]Host: $domain[crlf]Host: bug.com[crlf]Upgrade: websocket[crlf]Connection: Upgrade[crlf][crlf]" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "OVPN Download    : https://$domain:81/" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "Save Link Account: https://$domain:81/ssh-$Login.txt" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "Aktif Selama      : $masaaktif Hari" | tee -a /etc/user-create/user.log
+echo -e "Dibuat Pada       : $tnggl" | tee -a /etc/user-create/user.log
+echo -e "Berakhir Pada     : $expe" | tee -a /etc/user-create/user.log
+echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/user-create/user.log
+echo -e "\033[5m\033[35mTERIMAKASIH \033[34mSUDAH BERBELANJA \033[31mDI TokoVpn Merauke\033[0m" | tee -a /etc/user-create/user.log
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 m-sshws

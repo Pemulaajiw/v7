@@ -70,6 +70,7 @@ TEXT="
 ◇━━━━━━━━━━━━━━━━━━━━━━━◇
 <code>Username    :</code> <code>$Login</code>
 <code>Password    :</code> <code>$Pass</code>
+<code>ZIVPN Token : </code> <code>$Login</code>
 <code>Host        :</code> <code>$domain</code>
 ◇━━━━━━━━━━━━━━━━━━━━━━━◇
 <b>                   INFORMASI PORT</b>
@@ -85,6 +86,7 @@ TEXT="
 <code>OVPN TCP    :</code> 443, 1194
 <code>OVPN UDP    :</code> 2200
 <code>BadVPN UDP  :</code> 7100, 7300, 7300
+<code>Port ZIVPN  : $UDP_ZIVPN </code>
 ◇━━━━━━━━━━━━━━━━━━━━━━━◇
 <b>SSH UDP :</b>
 <code>$domain:1-65535@$Login:$Pass</code>
@@ -121,7 +123,7 @@ echo "### ${Login} " >>/etc/ssh/.ssh.db
 cat> /etc/cron.d/trialssh-${Login} << END
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-*/${timer} * * * * root /usr/local/sbin/z9dtrial ssh ${Login} ${timer}
+*/${pup} * * * * root /usr/local/sbin/z9dtrial ssh ${Login} ${pup}
 END
 service cron reload >/dev/null 2>&1
 
@@ -143,6 +145,7 @@ Format SSH OVPN Account
 ◇━━━━━━━━━━━━━━━━━◇
 Username         : $Login
 Password         : $Pass
+ZIVPN Token      : $Login
 Berakhir Pada  : $pup Menit
 ◇━━━━━━━━━━━━━━━━━◇
 IP               : $IP
@@ -158,6 +161,7 @@ Port OVPN SSL    : 443
 Port OVPN TCP    : 1194
 Port OVPN UDP    : 2200
 BadVPN UDP       : 7100, 7300, 7300
+Port ZIVPN UDP   : $UDP_ZIVPN (All Port)
 ◇━━━━━━━━━━━━━━━━━◇
 Payload WSS: GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf] 
 ◇━━━━━━━━━━━━━━━━━◇
@@ -172,6 +176,7 @@ echo -e "  Trial SSH & OpenVPN"
 echo -e "$BLUE◇━━━━━━━━━━━━━━━━━━━━◇$NC"
 echo -e " Username         : $Login"
 echo -e " Password         : $Pass"
+echo -e " ZIVPN Token      : ${LIGHT}$Login${NC}" 
 echo -e " IP/Host          : $IP"
 echo -e " Domain SSH       : $domain"
 echo -e " OpenSSH          : 22"

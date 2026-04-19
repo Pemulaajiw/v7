@@ -1,4 +1,11 @@
 #!/bin/bash
+# ==========================================
+#  SSH & ZIVPN PREMIUM CREATOR (FULL STYLE + BLINK)
+# ==========================================
+
+# --- CONFIG ZIVPN ---
+ZIVPN_CONFIG="/etc/zivpn/config.json"
+ZIVPN_DB="/etc/zivpn/user-db.json"
 clear
 #IZIN SCRIPT
 MYIP=$(curl -sS ipv4.icanhazip.com)
@@ -25,6 +32,13 @@ CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
 KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
 export TIME="10"
 export URL="https://api.telegram.org/bot$KEY/sendMessage"
+# Cek Port ZiVPN (Default 5667 jika tidak ketemu)
+if [[ -f "$ZIVPN_CONFIG" ]]; then
+    UDP_ZIVPN=$(grep -o '"listen": *"[^"]*"' $ZIVPN_CONFIG | cut -d'"' -f4 | sed 's/://g' | sed 's/0.0.0.0//g')
+else
+    UDP_ZIVPN="5667"
+fi
+[ -z "$UDP_ZIVPN" ] && UDP_ZIVPN="5667"
 clear
 # getting notif trx
 CHATID2="-1001381824793"
@@ -50,7 +64,7 @@ CITY=$(cat /etc/xray/city)
 domain=$(cat /etc/xray/domain)
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\033[1;96m              SSH Ovpn Account           \E[0m"
+echo -e "\033[1;96m              Create SSH & ZIVPN Account           \E[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 read -p " Username SSH : " Login
 read -p " Password SSH : " Pass

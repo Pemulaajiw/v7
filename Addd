@@ -192,45 +192,55 @@ KEY="$KEY"
 TIME="$TIME"
 URL="$URL"
 TEXT="
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<b>    Succes Create SSH Ovpn Account</b>
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<code>Username    :</code> <code>$Login</code>
-<code>Password    :</code> <code>$Pass</code>
-<code>Host        :</code> <code>$domain</code>
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<b>                   INFORMASI PORT</b>
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<code>OpenSSH     :</code> 443, 80, 22
-<code>Dropbear    :</code> 443, 109
-<code>SSH WS      :</code> 80, 8080, 8081-9999
-<code>SSH UDP     :</code> 1-65535
-<code>SSH SSL WS  :</code> 443
-<code>SSL/TLS     :</code> 400-900
-<code>OVPN WS SSL :</code> 443
-<code>OVPN SSL    :</code> 443
-<code>OVPN TCP    :</code> 443, 1194
-<code>OVPN UDP    :</code> 2200
-<code>BadVPN UDP  :</code> 7100, 7300, 7300
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<b>SSH UDP :</b>
-<code>$domain:1-65535@$Login:$Pass</code>
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<b>HTTP CUSTOM :</b>
-<code>$domain:80@$Login:$Pass</code>
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<b>Payload WSS :</b>
-<code>GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]</code>
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<b>OVPN Download:</b>
-https://$domain:81/
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<b>Save Link Account:</b>
-https://$domain:81/ssh-$Login.txt
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
-<code>Dibuat Pada  :</code> <b>$tnggl</b>
-<code>Berakhir Pada:</code> <b>$expe</b>
-◇━━━━━━━━━━━━━━━━━━━━━━━◇
+<code>☉——————————————————————————☉</code>
+<code>☘️Success Create SSH & ZIVPN☘️</code>
+<code>☉——————————————————————————☉</code>
+<code>Username         : </code> <code>$Login</code>
+<code>Password         : </code> <code>$Pass</code>
+<code>ZIVPN Token      : </code> <code>$Login</code>
+<code>Limit Ip         : </code> <code>$iplimit</code>
+<code>☉——————————————————————————☉</code>
+<code>Host             : </code> <code>$domain</code>
+<code>Limit Quota      : </code> <code>$Quota</code>
+<code>Host Slowdns     : </code> <code>$NS</code>
+<code>IP               : $IP</code>
+<code>ISP              : $ISP</code>
+<code>CITY             : $CITY</code>
+<code>Port OpenSSH     : 443, 80, 22</code>
+<code>Port Dropbear    : 443, 109</code>
+<code>Port SSH WS      : 80, 8080, 8081-9999 </code>
+<code>Port SSH UDP     : 1-65535 </code>
+<code>Port ZIVPN UDP   : $UDP_ZIVPN </code>
+<code>Port SSH SSL WS  : 443</code>
+<code>Port SSL/TLS     : 400-900</code>
+<code>Port OVPN WS SSL : 443</code>
+<code>Port OVPN SSL    : 443</code>
+<code>Port OVPN TCP    : 443, 1194</code>
+<code>Port OVPN UDP    : 2200</code>
+<code>BadVPN UDP       : 7100, 7300, 7300</code>
+<code>Pub Key          : </code> <code>$PUB</code>
+<code>☉——————————————————————————☉</code>
+<code>SSH WS       : </code>
+<code>$domain:80@${Login}:${Pass}</code>
+<code>SSH SSL      : </code>
+<code>$domain:443@${Login}:${Pass}</code>
+<code>SSH UDP      : </code>
+<code>$domain:1-65535@${Login}:${Pass}</code>
+<code>☉——————————————————————————☉</code>
+<code>🧿Payload WS       : 🧿</code><code>GET / HTTP/1.1[crlf]host: $domain[crlf]Upgrade: Websocket[crlf][crlf]</code>
+<code>☉——————————————————————————☉</code>
+<code>🧿Payload WSS      : 🧿</code><code>GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]</code>
+<code>☉——————————————————————————☉</code>
+<code>🧿Payload Enhanced : 🧿</code><code>PATCH / HTTP/1.1[crlf]Host: $domain[crlf]Host: bug.com[crlf]Upgrade: websocket[crlf]Connection: Upgrade[crlf][crlf]</code>
+<code>☉——————————————————————————☉</code>
+OVPN Download : https://$domain:81/
+<code>☉——————————————————————————☉</code>
+<code>Save Link Account: </code>https://$domain:81/ssh-$Login.txt
+<code>☉——————————————————————————☉</code>
+Aktif Selama         : $masaaktif Hari
+Dibuat Pada          : $tnggl
+Berakhir Pada        : $expe
+<code>☉——————————————————————————☉</code>
 "
 curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
 }

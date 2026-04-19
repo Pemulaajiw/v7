@@ -93,6 +93,14 @@ expi="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 expi=`date -d "$masaaktif days" +"%Y-%m-%d"`
+# --- ADD: MONITORING USER (IPTABLES) ---
+# Memasang meteran hitung data untuk user baru
+iptables -I OUTPUT -m owner --uid-owner $Login -j ACCEPT
+#iptables -I INPUT -m owner --uid-owner $Login -j ACCEPT
+# Simpan rule jika iptables-persistent terinstall
+if command -v netfilter-persistent &> /dev/null; then
+   netfilter-persistent save &> /dev/null
+fi
 
 if [ ! -e /etc/ssh ]; then
   mkdir -p /etc/ssh
@@ -113,6 +121,25 @@ if [[ "${DATADB}" != '' ]]; then
   sed -i "/\b${Login}\b/d" /etc/ssh/.ssh.db
 fi
 echo "#ssh# ${Login} ${Pass} ${Quota} ${iplimit} ${expe}" >>/etc/ssh/.ssh.db
+# --- 2. PROSES INTEGRASI ZIVPN (AUTO) ---
+if [ -f "$ZIVPN_CONFIG" ]; then
+    # Backup config sebelum edit
+    cp "$ZIVPN_CONFIG" "${ZIVPN_CONFIG}.bak"
+     
+    # Tambah Username ke Config ZiVPN (Cek duplicate dulu)
+    if ! jq -e ".auth.config | index(\"$Login\")" "$ZIVPN_CONFIG" > /dev/null; then
+          jq --arg user "$Login" '.auth.config += [$user]' "$ZIVPN_CONFIG" > "${ZIVPN_CONFIG}.tmp" && mv "${ZIVPN_CONFIG}.tmp" "$ZIVPN_CONFIG"
+    fi
+
+    # Tambah Expired ke User DB ZiVPN
+    if [ ! -f "$ZIVPN_DB" ]; then echo "{}" > "$ZIVPN_DB"; fi
+    jq --arg u "$Login" --arg e "$exp_date_iso" \
+        '.[$u] = {exp: $e}' "$ZIVPN_DB" > "${ZIVPN_DB}.tmp" && mv "${ZIVPN_DB}.tmp" "$ZIVPN_DB"
+
+    # Restart Service
+    systemctl restart zivpn
+fi
+
 clear
 
 cat > /var/www/html/ssh-$Login.txt <<-END
